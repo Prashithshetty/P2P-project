@@ -2,6 +2,8 @@
 
 A secure, peer-to-peer messaging application that enables real-time communication between users through WebRTC technology.
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/Prashithshetty/P2P-project.git)
+
 ## Overview
 
 P2P Chat is a web-based chat application that uses WebRTC for direct peer-to-peer communication between users. The application consists of two main components:
@@ -69,6 +71,13 @@ The application uses WebRTC for peer-to-peer communication:
 
 ## Setup and Installation
 
+### Clone the Repository
+
+```bash
+git clone https://github.com/Prashithshetty/P2P-project.git
+cd P2P-project
+```
+
 ### Prerequisites
 
 - Python 3.8+
@@ -78,21 +87,27 @@ The application uses WebRTC for peer-to-peer communication:
 ### Backend Setup
 
 1. Navigate to the signaling-server directory:
-   ```
+   ```bash
    cd signaling-server
    ```
 
 2. Create a virtual environment:
-   ```
+   ```bash
    python -m venv venv
    ```
 
 3. Activate the virtual environment:
-   - Windows: `venv\Scripts\activate`
-   - macOS/Linux: `source venv/bin/activate`
+   - Windows: 
+     ```bash
+     venv\Scripts\activate
+     ```
+   - macOS/Linux: 
+     ```bash
+     source venv/bin/activate
+     ```
 
 4. Install dependencies:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
@@ -103,24 +118,37 @@ The application uses WebRTC for peer-to-peer communication:
    ```
 
 6. Run the server:
-   ```
+   ```bash
    python app.py
    ```
+   The server will start on http://localhost:5000
 
 ### Frontend Setup
 
 The frontend is static HTML/CSS/JS and can be served directly from the file system or using a simple HTTP server:
 
-1. Using Python's built-in HTTP server:
-   ```
+1. In a new terminal window, navigate to the p2p-chat directory:
+   ```bash
    cd p2p-chat
+   ```
+
+2. Using Python's built-in HTTP server:
+   ```bash
    python -m http.server 8000
    ```
 
-2. Open your browser and navigate to:
+3. Open your browser and navigate to:
    ```
    http://localhost:8000
    ```
+
+### Running Both Components
+
+For the application to work properly, you need to run both:
+1. The signaling server (backend) on port 5000
+2. The web client (frontend) on port 8000
+
+Make sure MongoDB is running before starting the signaling server.
 
 ## Usage
 
