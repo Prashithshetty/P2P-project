@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Chat - Login</title>
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h1>P2P Chat</h1>
+                </div>
+                <p>Secure, peer-to-peer messaging</p>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+            
+            <div class="alert-container"></div>
+            
+            <div id="login-tab" class="tab-content active">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" name="password" required>
+                            <i class="fas fa-eye toggle-password" data-target="login-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="remember-me" name="remember">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+            </div>
+            
+            <div id="register-tab" class="tab-content">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-username" name="username" required>
+                        </div>
+                        <small id="username-feedback"></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" name="email" required>
+                        </div>
+                        <small id="email-feedback"></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" name="password" required>
+                            <i class="fas fa-eye toggle-password" data-target="register-password"></i>
+                        </div>
+                        <small>Password must be at least 8 characters long</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-confirm-password" name="confirm-password" required>
+                            <i class="fas fa-eye toggle-password" data-target="register-confirm-password"></i>
+                        </div>
+                        <small id="password-match-feedback"></small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="info-container">
+            <div class="info-content">
+                <h2>Welcome to P2P Chat</h2>
+                <p>A secure, peer-to-peer messaging application that keeps your conversations private.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure</h3>
+                        <p>End-to-end encryption ensures your messages stay private.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h3>Connect</h3>
+                        <p>Chat with friends and colleagues in real-time.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-globe"></i>
+                        <h3>Accessible</h3>
+                        <p>Works on any device with a modern web browser.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId + '-tab') {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            const togglePasswordBtns = document.querySelectorAll('.toggle-password');
+            togglePasswordBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        this.classList.remove('fa-eye');
+                        this.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        this.classList.remove('fa-eye-slash');
+                        this.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            function showAlert(message, type = 'error') {
+                const alertContainer = document.querySelector('.alert-container');
+                const alertElement = document.createElement('div');
+                alertElement.className = `alert alert-${type}`;
+                alertElement.textContent = message;
+                
+                alertContainer.appendChild(alertElement);
+                
+                setTimeout(() => {
+                    alertElement.classList.add('fade-out');
+                    setTimeout(() => {
+                        alertContainer.removeChild(alertElement);
+                    }, 300);
+                }, 5000);
+            }
+            
+            if (isLoggedIn()) {
+                window.location.href = './index.html';
+            }
+            
+            const usernameInput = document.getElementById('register-username');
+            const usernameFeedback = document.getElementById('username-feedback');
+            
+            let usernameTimer;
+            usernameInput.addEventListener('input', function() {
+                clearTimeout(usernameTimer);
+                
+                const username = this.value.trim();
+                if (username.length < 3) {
+                    usernameFeedback.textContent = 'Username must be at least 3 characters';
+                    usernameFeedback.className = 'text-error';
+                    return;
+                }
+                
+                usernameFeedback.textContent = 'Checking availability...';
+                usernameFeedback.className = '';
+                
+                usernameTimer = setTimeout(() => {
+                    checkUsernameAvailability(username)
+                        .then(available => {
+                            if (available) {
+                                usernameFeedback.textContent = 'Username is available';
+                                usernameFeedback.className = 'text-success';
+                            } else {
+                                usernameFeedback.textContent = 'Username is already taken';
+                                usernameFeedback.className = 'text-error';
+                            }
+                        })
+                        .catch(error => {
+                            usernameFeedback.textContent = 'Error checking username';
+                            usernameFeedback.className = 'text-error';
+                        });
+                }, 500);
+            });
+            
+            const emailInput = document.getElementById('register-email');
+            const emailFeedback = document.getElementById('email-feedback');
+            
+            let emailTimer;
+            emailInput.addEventListener('input', function() {
+                clearTimeout(emailTimer);
+                
+                const email = this.value.trim();
+                if (!email || !email.includes('@')) {
+                    emailFeedback.textContent = '';
+                    return;
+                }
+                
+                emailFeedback.textContent = 'Checking availability...';
+                emailFeedback.className = '';
+                
+                emailTimer = setTimeout(() => {
+                    checkEmailAvailability(email)
+                        .then(available => {
+                            if (available) {
+                                emailFeedback.textContent = 'Email is available';
+                                emailFeedback.className = 'text-success';
+                            } else {
+                                emailFeedback.textContent = 'Email is already registered';
+                                emailFeedback.className = 'text-error';
+                            }
+                        })
+                        .catch(error => {
+                            emailFeedback.textContent = 'Error checking email';
+                            emailFeedback.className = 'text-error';
+                        });
+                }, 500);
+            });
+            
+            const passwordInput = document.getElementById('register-password');
+            const confirmPasswordInput = document.getElementById('register-confirm-password');
+            const passwordMatchFeedback = document.getElementById('password-match-feedback');
+            
+            function checkPasswordMatch() {
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                if (!confirmPassword) {
+                    passwordMatchFeedback.textContent = '';
+                    return;
+                }
+                
+                if (password === confirmPassword) {
+                    passwordMatchFeedback.textContent = 'Passwords match';
+                    passwordMatchFeedback.className = 'text-success';
+                } else {
+                    passwordMatchFeedback.textContent = 'Passwords do not match';
+                    passwordMatchFeedback.className = 'text-error';
+                }
+            }
+            
+            passwordInput.addEventListener('input', checkPasswordMatch);
+            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+            
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                const remember = document.getElementById('remember-me').checked;
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                
+                loginUser(email, password, remember)
+                    .then(data => {
+                        showAlert('Login successful! Redirecting...', 'success');
+                        setTimeout(() => {
+                            window.location.href = './index.html';
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        showAlert(error.message || 'Login failed. Please check your credentials.');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    });
+            });
+            
+            const registerForm = document.getElementById('register-form');
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('register-username').value.trim();
+                const email = document.getElementById('register-email').value.trim();
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    showAlert('Passwords do not match');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    showAlert('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+                
+                registerUser(username, email, password)
+                    .then(data => {
+                        showAlert('Registration successful! Please log in.', 'success');
+                        
+                        registerForm.reset();
+                        
+                        document.querySelector('.tab-btn[data-tab="login"]').click();
+                        
+                        document.getElementById('login-email').value = email;
+                        
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    })
+                    .catch(error => {
+                        showAlert(error.message || 'Registration failed. Please try again.');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

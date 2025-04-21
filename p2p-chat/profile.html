@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - P2P Chat</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="profile-container">
+        <header>
+            <div class="header-left">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1>Profile</h1>
+            </div>
+            <div class="header-right">
+                <button id="save-profile" class="btn btn-primary">Save</button>
+            </div>
+        </header>
+        
+        <div class="profile-content">
+            <div class="profile-picture-section">
+                <div class="profile-picture-container">
+                    <div id="profile-picture">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-picture-overlay">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
+                </div>
+                <p class="profile-picture-hint">Click to change profile picture</p>
+            </div>
+            
+            <div class="profile-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" readonly>
+                    <p class="field-hint">Username cannot be changed</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="display-name">Display Name</label>
+                    <input type="text" id="display-name" placeholder="Enter your display name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" readonly>
+                    <p class="field-hint">Email cannot be changed</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="Available">Available</option>
+                        <option value="Busy">Busy</option>
+                        <option value="Away">Away</option>
+                        <option value="Do Not Disturb">Do Not Disturb</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" rows="4" placeholder="Tell us about yourself"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification-toast" class="hidden">
+        <div id="notification-message"></div>
+    </div>
+    
+    <div id="login-required" class="overlay hidden">
+        <div class="overlay-content">
+            <h2>Login Required</h2>
+            <p>Please log in to view and edit your profile.</p>
+            <button id="go-to-login" class="btn btn-primary">Go to Login</button>
+        </div>
+    </div>
+    
+    <script src="./js/auth.js"></script>
+    <script src="./js/profile.js"></script>
+</body>
+</html>
